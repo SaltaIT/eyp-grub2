@@ -4,6 +4,8 @@ class grub2::params {
   {
     'redhat' :
     {
+      $bootcfg_bios='/boot/grub2/grub.cfg'
+      $bootcfg_uefi='/boot/efi/EFI/redhat/grub.cfg'
       case $::operatingsystemrelease
       {
         /^7.*$/:

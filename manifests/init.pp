@@ -13,11 +13,23 @@ class grub2($transparent_huge_pages=undef) inherits grub2::params {
       notify => Exec['grub2-mkconfig'],
     }
 
-    exec { 'grub2-mkconfig':
-      command => 'grub2-mkconfig -o /boot/grub2/grub.cfg',
-      refreshonly => true,
+    # fact
+    $eyp_grub2_booted_fact=getvar('::eyp_grub2_booted')
+
+    if($eyp_grub2_booted_fact=='UEFI')
+    {
+      $bootcfg=$grub2::params::bootcfg_uefi
+    }
+    else
+    {
+      # default: BIOS
+      $bootcfg=$grub2::params::bootcfg_bios
     }
 
+    exec { 'grub2-mkconfig':
+      command => "grub2-mkconfig -o ${bootcfg}",
+      refreshonly => true,
+    }
   }
 
 }
