@@ -27,7 +27,7 @@ class grub2($transparent_huge_pages=undef) inherits grub2::params {
     }
 
     exec { 'grub2-mkconfig':
-      command => "grub2-mkconfig -o ${bootcfg}",
+      command => "${grub2::params::grubmkconfig} -o ${bootcfg}",
       refreshonly => true,
     }
   }
