@@ -26,6 +26,8 @@ class grub2($transparent_huge_pages=undef) inherits grub2::params {
       $bootcfg=$grub2::params::bootcfg_bios
     }
 
+
+    #nota: no canviar per unless donat que poden haver mes paramatres gestionats
     exec { 'grub2-mkconfig':
       command     => "${grub2::params::grubmkconfig} -o ${bootcfg}",
       refreshonly => true,
