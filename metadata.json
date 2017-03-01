@@ -1,6 +1,6 @@
 {
   "name": "eyp-grub2",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "author": "eyp",
   "summary": "grub2 module to enable transparent_huge_pages on CentOS 7",
   "license": "Apache-2.0",

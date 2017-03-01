@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.8
+
+* **boot.cfg** owner and mode under puppet management
+
 ## 0.1.7
 
 * bugfix sed GRUB_CMDLINE_LINUX
