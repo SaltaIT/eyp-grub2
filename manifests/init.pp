@@ -1,5 +1,10 @@
 #
-class grub2($transparent_huge_pages=undef) inherits grub2::params {
+class grub2 (
+              $transparent_huge_pages = undef,
+              $bootcfg_owner          = 'root',
+              $bootcfg_group          = 'root',
+              $bootcfg_mode           = '0400',
+            ) inherits grub2::params {
 
   Exec {
     path => '/bin:/sbin:/usr/bin:/usr/sbin',
@@ -25,7 +30,7 @@ class grub2($transparent_huge_pages=undef) inherits grub2::params {
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
-    mode   => '0400',
+    mode   => $bootcfg_mode,
   }
 
   if($transparent_huge_pages!=undef)
