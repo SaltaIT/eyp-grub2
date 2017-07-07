@@ -1,4 +1,6 @@
 #
+# centos set default kernel: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/sec-Making_Persistent_Changes_to_a_GRUB_2_Menu_Using_the_grubby_Tool.html
+#
 class grub2 (
               $transparent_huge_pages = undef,
               $bootcfg_owner          = 'root',
