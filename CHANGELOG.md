@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.10
+
+* basic CentOS 6 support
+
 ## 0.1.9
 
 * added a variable to be able to set a custom mode and ownership for **boot.cfg**

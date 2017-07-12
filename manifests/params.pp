@@ -4,10 +4,22 @@ class grub2::params {
   {
     'redhat' :
     {
-      $bootcfg_bios='/boot/grub2/grub.cfg'
+
       $bootcfg_uefi='/boot/efi/EFI/redhat/grub.cfg'
 
       $grubmkconfig='grub2-mkconfig'
+
+      case $::operatingsystemrelease
+      {
+        /^[5-6].*$/:
+        {
+          $bootcfg_bios='/boot/grub/grub.cfg' 
+        }
+        /^7.*$/:
+        {
+          $bootcfg_bios='/boot/grub2/grub.cfg'
+        }
+        default: { fail("Unsupported RHEL/CentOS version! - ${::operatingsystemrelease}")  }
     }
     'Debian':
     {
