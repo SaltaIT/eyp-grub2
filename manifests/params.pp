@@ -13,13 +13,14 @@ class grub2::params {
       {
         /^[5-6].*$/:
         {
-          $bootcfg_bios='/boot/grub/grub.cfg' 
+          $bootcfg_bios='/boot/grub/grub.cfg'
         }
         /^7.*$/:
         {
           $bootcfg_bios='/boot/grub2/grub.cfg'
         }
         default: { fail("Unsupported RHEL/CentOS version! - ${::operatingsystemrelease}")  }
+      }
     }
     'Debian':
     {
