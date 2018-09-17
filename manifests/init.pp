@@ -66,6 +66,5 @@ class grub2 (
   exec { 'grub2-mkconfig':
     command     => "${grub2::params::grubmkconfig} -o ${bootcfg}",
     refreshonly => true,
-    require     => Exec['grub2 transparent huge pages'],
   }
 }
