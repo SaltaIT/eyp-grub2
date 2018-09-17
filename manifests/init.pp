@@ -2,10 +2,11 @@
 # centos set default kernel: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/sec-Making_Persistent_Changes_to_a_GRUB_2_Menu_Using_the_grubby_Tool.html
 #
 class grub2 (
-              $transparent_huge_pages = undef,
-              $bootcfg_owner          = 'root',
-              $bootcfg_group          = 'root',
-              $bootcfg_mode           = '0400',
+              $transparent_huge_pages                   = undef,
+              $bootcfg_owner                            = 'root',
+              $bootcfg_group                            = 'root',
+              $bootcfg_mode                             = '0400',
+              $disable_consistent_network_device_naming = false,
             ) inherits grub2::params {
 
   Exec {
@@ -42,13 +43,29 @@ class grub2 (
       unless  => "grep 'transparent_hugepage=${transparent_huge_pages}' /etc/default/grub",
       notify  => Exec['grub2-mkconfig'],
     }
+  }
 
-    #nota: no canviar per unless donat que poden haver mes paramatres gestionats
-    exec { 'grub2-mkconfig':
-      command     => "${grub2::params::grubmkconfig} -o ${bootcfg}",
-      refreshonly => true,
-      require     => Exec['grub2 transparent huge pages'],
+  if($disable_consistent_network_device_naming)
+  {
+    if($::osfamily=='redhat')
+    {
+      package { 'biosdevname':
+        ensure => 'present',
+        before => Exec['grub2 disable consistent network device naming'],
+      }
+    }
+
+    exec { 'grub2 disable consistent network device naming':
+      command => "sed 's/^GRUB_CMDLINE_LINUX=\"\\?\\([^\"]*\\)\"\\?/GRUB_CMDLINE_LINUX=\"\\1 biosdevname=0 net.ifnames=0\"/' -i /etc/default/grub",
+      unless  => "grep 'biosdevname=0 net.ifnames=0' /etc/default/grub",
+      notify  => Exec['grub2-mkconfig'],
     }
   }
 
+  #nota: no canviar per unless donat que poden haver mes paramatres gestionats
+  exec { 'grub2-mkconfig':
+    command     => "${grub2::params::grubmkconfig} -o ${bootcfg}",
+    refreshonly => true,
+    require     => Exec['grub2 transparent huge pages'],
+  }
 }

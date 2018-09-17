@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.11
+
+* Added flag to be able to disable consistent network device naming [Reference](https://access.redhat.com/discussions/916973)
+
 ## 0.1.10
 
 * basic CentOS 6 support
