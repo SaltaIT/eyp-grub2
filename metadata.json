@@ -1,12 +1,12 @@
 {
   "name": "eyp-grub2",
-  "version": "0.1.11",
-  "author": "eyp",
+  "version": "1.0.11",
+  "author": "Jordi Prats",
   "summary": "grub2 module to enable transparent_huge_pages on CentOS 7",
   "license": "Apache-2.0",
-  "source": "https://github.com/NTTCom-MS/eyp-grub2",
-  "project_page": "https://github.com/NTTCom-MS/eyp-grub2",
-  "issues_url": "https://github.com/NTTCom-MS/eyp-grub2/issues",
+  "source": "https://github.com/SaltaIT/eyp-grub2",
+  "project_page": "https://github.com/SaltaIT/eyp-grub2",
+  "issues_url": "https://github.com/SaltaIT/eyp-grub2/issues",
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0 < 9.9.9"}
   ],
@@ -43,7 +43,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 3.8.0"
+      "version_requirement": ">= 4.0.0"
     }
   ]
 }
